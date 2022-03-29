@@ -53,7 +53,9 @@ class App extends Component {
   handleSubmit = async () => {
     const {cost, itemName} = this.state;
     console.log(cost, itemName);
-    await this.itemManager.methods.createItem(itemName, cost).send({from: this.accounts[0]});
+    let result = await this.itemManager.methods.createItem(itemName, cost).send({from: this.accounts[0]});
+    console.log(result);
+    alert("Send "+cost+" in Wei to "+result.events.SupplyChainStep.returnValues._itemAddress);
   }
 
   render() {
