@@ -44,7 +44,6 @@ contract("Token Test", async (accounts) => {
     const sendTokens = 1;
     let instance = await Token.deployed();
     let totalSupply = await instance.totalSupply();
-
     await expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(totalSupply.sub(new BN(sendTokens)));
     await expect(instance.transfer(deployerAccount, sendTokens, {from: recipient})).to.eventually.be.fulfilled;
     await expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(totalSupply);
