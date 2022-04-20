@@ -1,15 +1,9 @@
 const Token = artifacts.require("MyToken");
-const TokenSale = artifacts.require("MyTokenSale");
 
-var chai = require("chai");
+const chai = require("./chaiSetup.js");
 const BN = web3.utils.BN;
-const chaiBN = require("chai-bn")(BN);
-chai.use(chaiBN);
-
-var chaiAsPromised = require("chai-as-promised"); // allows for the use of "eventually instead of await"
-chai.use(chaiAsPromised);
-
 const expect = chai.expect;
+
 require("dotenv").config({path: "../.env"});
 
 contract("Token Test", async (accounts) => {
@@ -28,16 +22,6 @@ contract("Token Test", async (accounts) => {
     await expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(totalSupply);
   });
 
-/*   it("all tokens should be in Token Sale contract", async () => {
-    let instance = await Token.deployed();
-    let totalSupply = await instance.totalSupply();
-    let TokenSaleInstance = await TokenSale.deployed();
-    // let balance = await instance.balanceOf(acccounts[0]);
-    // assert.equal(balance.valueOf(), totalSupply.valueOf(), "The balance was not the same");
-    await expect(instance.balanceOf(deployerAccount)).to.eventually.be.zero;
-    await expect(instance.balanceOf(TokenSaleInstance.address)).to.eventually.be.a.bignumber.equal(totalSupply);
-  }); */
-
   it("is possible to send tokens between accounts", async () => {
     const sendTokens = 1;
     let instance = this.myToken;
@@ -49,20 +33,6 @@ contract("Token Test", async (accounts) => {
     await expect(instance.balanceOf(recipient)).to.eventually.be.a.bignumber.equal(new BN(sendTokens))
     
   })
-
-/*   it("is possible to buy tokens", async () => {
-    const sendWei = 1;
-    let instance = await Token.deployed();
-    let totalSupply = await instance.totalSupply();
-    let TokenSaleInstance = await TokenSale.deployed();
-    let rate = await TokenSaleInstance.rate();
-
-    await expect(instance.balanceOf(TokenSaleInstance.address)).to.eventually.be.a.bignumber.equal(totalSupply);
-    await expect(anotherAccount.transfer(TokenSaleInstance.address, sendWei)).to.eventually.be.fulfilled;
-    await expect(instance.balanceOf(anotherAccount)).to.eventually.be.a.bignumber.equal(sendWei.mul(rate));
-    //await expect(instance.balanceOf(recipient)).to.eventually.be.a.bignumber.equal(new BN(sendTokens))
-    
-  }) */
 
   it("is not possible to send more tokens than available in total", async () => {
     let instance = this.myToken;
