@@ -9,9 +9,11 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
     development: {
-      port: 7545,
+      //port: 7545,
+      port: 9545,
       host: "127.0.0.1",
       network_id: 5777
+      //network_id: 9545
     },
     ganache_local: {
       provider: function() {

@@ -7,7 +7,7 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { loaded:false, kycAddress: "0x123...", tokenSaleAddress: null, userTokens:0 };
+  state = { loaded:false, kycAddress: "0x123...", tokenSaleAddress: null, userTokens:0, totalTokens:0 };
 
   componentDidMount = async () => {
     try {
@@ -89,6 +89,7 @@ class App extends Component {
         <p>If you want to buy tokens, send Wei to this address: {this.state.tokenSaleAddress}</p>
         <p>You currently have: {this.state.userTokens} CAPPU Tokens</p>
         <button type="button" onClick={this.handleBuyTokens}>Buy more tokens</button>
+        <h2>Total Token Supply is: {this.state.totalTokens}</h2>
       </div>
     );
   }

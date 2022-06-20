@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
 
-import "../../GSN/Context.sol";
-import "../Roles.sol";
+import "@openzeppelin/contracts/GSN/Context.sol";
+import "@openzeppelin/contracts/access/Roles.sol";
 
 contract MinterRole is Context {
     using Roles for Roles.Role;
